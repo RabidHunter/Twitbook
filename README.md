@@ -1,4 +1,5 @@
 ## Інструкції для запуску
 
-1. Вручну імпортувати файл `my_database.sql` у phpMyAdmin.
-2. Ввести у терміналі: "docker-compose up -d --build".
+1. Ввести у терміналі: "docker-compose up -d --build".
+2. Вручну імпортувати файл `my_database.sql` у phpMyAdmin.
+3. Тепер можна реєструватися.
