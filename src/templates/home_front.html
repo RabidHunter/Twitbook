@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitbook</title>
+    <link rel="icon" type="image/jpg" href="../assets/img/y.jpg">
+</head>
+<body>
+    <div class="sidebar">
+        <p class="username-display">Logged in as: <span id="username">
+        <script>
+                fetch('../php/username.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('username').textContent = data.username;
+                    })
+            </script>
+        </span></p>
+        <button onclick="window.location.href='home_front.html'" class="btn back">Back to Home</button>
+        <button class="btn view" onclick="window.location.href='my_tweets_front.html'">View My Tweets</button>
+        <button id="tweetBtn" class="btn create">Create Tweet</button>
+        <form method="post" action='../php/activity.php' style="margin-top: auto;">
+            <button class="btn" name="logout">Sign out</button>
+        </form>
+    </div>
+    <div class="main-content">
+        <div class="main-title">
+            <h2  class="title">Recent tweets from our users</h2>
+        </div>
+
+<div class="tweets" id="tweetsContainer">
+    <h1 id="noTweetsMessage" style="display: none;">There are currently no tweets from our users.</h1>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("../php/home.php")
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                const tweetsContainer = document.getElementById("tweetsContainer");
+                const noTweetsMessage = document.getElementById("noTweetsMessage");
+
+                if (data.tweets.length === 0) {
+                    noTweetsMessage.style.display = "block"; 
+                    return;
+                }
+
+                data.tweets.forEach(tweet => {
+                    const tweetElement = document.createElement("div");
+                    tweetElement.classList.add("tweet");
+                    tweetElement.innerHTML = `
+                        <h3><strong>${tweet.username}</strong></h3>
+                        <h4>${tweet.created_at}</h4>
+                        <p>${tweet.content}</p>
+                        ${tweet.image_url ? `<img src="${tweet.image_url}" alt="Tweet Image">` : ""}
+                    `;
+                    tweetsContainer.appendChild(tweetElement);
+                });
+            }
+        })
+        .catch(error => console.error("Error loading tweets:", error));
+});
+</script>
+    </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <form action="../php/tweets_to_db.php" method="POST" enctype="multipart/form-data">
+                <textarea placeholder="What happened?" name="content" required></textarea>
+                <input type="file" name="image" accept="image/*">
+                <button type="submit" id="post_modal" name="post_tweet" class="btn post">Post Tweet</button>
+            </form>
+            <button id="close_modal" class="btn close">Close</button>
+        </div>
+    </div>
+</body>
+</html>

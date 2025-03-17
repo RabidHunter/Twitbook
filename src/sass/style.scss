@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+$main-bg-color: rgb(29, 29, 29);
+$secondary-bg-color: rgb(96, 96, 96);
+$gradient-bg: linear-gradient($main-bg-color, $secondary-bg-color);
+$input-border-color: rgba(255, 255, 255, 0.3);
+$button-bg-color: white;
+$button-hover-bg-color: rgb(137, 137, 137);
+$button-color: rgb(71, 71, 71);
+$button-hover-color: white;
+$font-family: "Lato", serif;
+$font-size-large: 50px;
+$font-size-medium: 20px;
+$font-size-small: 16px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font-family, serif;
+    color: white;
+}
+
+body {
+    background: $gradient-bg;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 40px 0 30px 0;
+
+    h1 {
+        font-size: $font-size-large;
+        font-weight: 700;
+    }
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    width: 450px;
+    height: auto;
+    background: linear-gradient(rgb(105, 105, 105), rgb(65, 65, 65));
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 20px 40px;
+
+    h2 {
+        font-size: 42px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .input-box {
+        width: 100%;
+        height: 50px;
+        position: relative;
+        margin-bottom: 10px;
+
+        input {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            font-size: $font-size-medium;
+            outline: none;
+            border: 2px solid $input-border-color;
+            background: transparent;
+            padding-left: 20px;
+            font-weight: 400;
+
+            &::placeholder {
+                color: white;
+            }
+        }
+
+        i {
+            position: absolute;
+            text-align: left;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+            font-size: 22px;
+            font-weight: 400;
+        }
+    }
+
+    button {
+        width: 100%;
+        height: 45px;
+        border: none;
+        outline: none;
+        background: $button-bg-color;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        color: black;
+        font-size: $font-size-medium;
+        cursor: pointer;
+        font-weight: 600;
+
+        &:hover {
+            background-color: $button-hover-bg-color;
+            color: $button-hover-color;
+            transition: color 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+    }
+
+    .register-login-link {
+        font-size: $font-size-small;
+        text-align: right;
+        margin: 20px 0 5px;
+
+        p {
+            a {
+                font-weight: 700;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: rgb(133, 133, 133);
+                    transition: color 0.3s ease;
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    height: auto;
+    padding: 20px;
+    text-align: center;
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: $font-size-small;
+            font-weight: 600;
+
+            &:hover {
+                color: rgb(150, 150, 150);
+                text-decoration: underline;
+                transition: color 0.3s ease;
+            }
+        }
+    }
+
+    .terms-text {
+        font-size: $font-size-small;
+        color: white;
+        margin-bottom: 20px;
+        line-height: 1.6;
+
+        a {
+            color: white;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: rgb(150, 150, 150);
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up to Twitbook</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/jpg" href="../assets/img/y.jpg">
+</head>
+<body>
+    <div class="flex-container">
+        <div class="header">
+            <h1>The best social network according to Twitter creators!</h1>
+        </div>
+        <div class="main">
+            <div class="wrapper"> 
+                <form action="../php/register.php" method="post">
+                    <h2>Sign up</h2>
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" name="username" required>
+                        <i class='bx bx-user'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" placeholder="Email" name="email" required>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" name="password" required>
+                        <i class='bx bx-lock-alt'></i>
+                    </div>                 
+                    <button type="submit">Sign up</button>
+                    <div class="register-login-link">
+                        <p>Already have an Account? <a href="sign_in.html">Sign in</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="terms-text">
+                <p>By registering, you agree to the <a href="empty.html">Terms of Service</a> and <a href="empty.html">Privacy and Cookie Policy</a>.</p>
+            </div>
+            <div class="footer-links">
+                <a href='empty.html'>About the community</a>
+                    <a href='empty.html'>Download the application</a>
+                    <a href='empty.html'>Information Center</a>
+                    <a href='empty.html'>Terms of use</a>
+                    <a href='empty.html'>Contacts</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

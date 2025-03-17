@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Tweet</title>
+    <link rel="icon" type="image/jpg" href="../assets/img/y.jpg">
+</head>
+<body>
+    <div class="sidebar">
+        <p class="username-display">Logged in as: <span id="username">
+        <script>
+                fetch('../php/username.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('username').textContent = data.username;
+                    })
+                    .catch(error => console.error("Error loading username:", error));
+            </script>
+        </span></p>
+        <button onclick="window.location.href='home_front.html'" class="btn back">Back to Home</button>
+        <button class="btn view" onclick="window.location.href='my_tweets_front.html'">View My Tweets</button>
+        <button id="tweetBtn" class="btn create">Create Tweet</button>
+        <form method="post" action='../php/activity.php' style="margin-top: auto;">
+            <button class="btn" name="logout">Sign out</button>
+        </form>
+    </div>
+
+    <div class="main-content">
+        <div class="main-title">
+            <h2 class="title">Edit Your Tweet</h2>
+        </div>
+        <div class="tweet_edit_content">
+        <form id="editTweetForm" action="../php/update_tweet.php" method="POST" enctype="multipart/form-data">
+            <textarea id="tweetContent" name="content" required></textarea>
+            <input type="file" name="image" accept="image/*">
+            <div id="currentImage"></div>
+            <input type="hidden" id="tweetId" name="tweet_id">
+            <button type="submit" class="btn update">Update Tweet</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tweetId = urlParams.get('tweet_id');
+
+            try {
+                const response = await fetch("../php/edit_tweet.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `tweet_id=${tweetId}`
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const tweet = data.tweet;
+
+                    document.getElementById("tweetContent").value = tweet.content;
+                    document.getElementById("tweetId").value = tweet.id;
+
+                    if (tweet.image_url) {
+                        document.getElementById("currentImage").innerHTML = `<img src="${tweet.image_url}" alt="Current Tweet Image" width="100">`;
+                    }
+                } else {
+                    alert("Error: " + data.message);
+                }
+
+            } catch (error) {
+                console.error("Request error:", error);
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>
